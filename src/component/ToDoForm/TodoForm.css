@@ -1,0 +1,20 @@
+.todoForm {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  gap: 5px;
+}
+.todoInputAdd {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+.todoInput {
+  padding: 10px 40px;
+  border: none;
+  border-radius: 5px;
+}
+.todoTasks {
+  display: flex;
+  gap: 15px;
+}

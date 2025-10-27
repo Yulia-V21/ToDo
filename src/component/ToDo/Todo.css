@@ -1,0 +1,15 @@
+.toDoBg {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.toDo {
+    display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 5px;
+  background-color: rgb(120, 120, 240);
+}

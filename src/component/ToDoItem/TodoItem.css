@@ -1,0 +1,20 @@
+.toDoItem {
+  width: 100%;
+  padding: 7px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  background-color: rgb(186, 186, 228);
+  border-radius: 3px;
+}
+.toDoItemBtn {
+  display: flex;
+  gap: 5px;
+}
+.todoItemTask {
+  margin: 3px 10px;
+}
+.comleted {
+  text-decoration: line-through;
+}
