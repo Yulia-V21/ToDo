@@ -1,17 +1,23 @@
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { searchTask } from "../../store/actions";
 import ToDoBtN from "../ToDoBtn/TodoBtn";
 
 const ToDoSearch = ({ onSearchClick }) => {
-  const [inputValue, setInputValue] = useState("");
+  const searchValue = useSelector((state) => state.searchValue);
+  const dispatch = useDispatch();
 
-  const handleOnChange = (e) => {
-    setInputValue(e.target.value);
+  const handleOnChangeSearch = (event) => {
+    dispatch(searchTask(event.target.value));
   };
 
   return (
     <div>
-      <input type="text" value={inputValue} onChange={handleOnChange} />
-      <ToDoBtN text="Search" onClick={() => onSearchClick(inputValue)} />
+      <input
+        type="text"
+        value={searchValue}
+        onChange={handleOnChangeSearch}
+        placeholder="Search Task"
+      />
     </div>
   );
 };

@@ -1,26 +1,23 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import ToDoBtN from "../ToDoBtn/TodoBtn";
 import ToDoList from "../ToDoList/TodoList";
-import { data } from "../../asset/toDoData";
+import {
+  addTask,
+  deleteTask,
+  statusTask,
+  editTask,
+  saveEditTask,
+} from "../../store/actions";
 import "./TodoForm.css";
 
-const ToDoForm = ({ searchValue }) => {
+const ToDoForm = () => {
+  const todos = useSelector((state) => state.todos);
+  const filteredTasks = useSelector((state) => state.filteredTasks);
+  const searchValue = useSelector((state) => state.searchValue);
   const [inputValue, setInputValue] = useState("");
-  const [tasks, setTasks] = useState(data);
-  const [searchTask, setSearchTask] = useState(data);
 
-  useEffect(() => {
-    if (searchValue !== "") {
-      setSearchTask(
-        tasks.filter((task) =>
-          task.title.toLowerCase().includes(searchValue.toLowerCase())
-        
-        )
-      );
-    } else {
-      setSearchTask(tasks);
-    }
-  }, [searchValue, tasks]);
+  const dispatch = useDispatch();
 
   const handleOnChange = (event) => {
     event.preventDefault();
@@ -29,64 +26,27 @@ const ToDoForm = ({ searchValue }) => {
 
   const handleClick = () => {
     if (inputValue !== "") {
-      setTasks((prevTask) => [
-        ...prevTask,
-        {
-          id: Date.now(),
-          title: inputValue,
-          isCompleted: false,
-          isEdit: false,
-        },
-      ]);
+      console.log(inputValue);
+      dispatch(addTask(inputValue));
+
       setInputValue("");
     }
   };
   const handleDeleteClick = (id) => {
-    const tempTasks = [...tasks];
-    setTasks(
-      tempTasks.filter((item) => {
-        return item.id !== id;
-      })
-    );
+    dispatch(deleteTask(id));
   };
   const handleCompleted = (id) => {
-    const tempTasks = [...tasks];
-    setTasks(
-      tempTasks.map((el) => {
-        if (el.id === id) {
-          return {
-            ...el,
-            isCompleted: !el.isCompleted,
-          };
-        }
-        return el;
-      })
-    );
+    dispatch(statusTask(id));
   };
   const handleEditClick = (id) => {
-    const tempTasks = [...tasks];
-    setTasks(
-      tempTasks.map((el) => {
-        if (el.id === id) {
-          return {
-            ...el,
-            isEdit: !el.isEdit,
-          };
-        }
-        return el;
-      })
-    );
+    dispatch(editTask(id));
   };
   const handleSaveEdit = (id, newTitle) => {
-    setTasks(
-      tasks.map((task) =>
-        tasks.id === id ? { ...tasks, title: newTitle, isEdit: false } : tasks
-      )
-    );
+    dispatch(saveEditTask(id, newTitle));
   };
 
-  const totalTask = tasks.length;
-  const totalCompleted = tasks.filter((t) => t.isCompleted).length;
+  const totalTask = todos.length;
+  const totalCompleted = todos.filter((t) => t.isCompleted).length;
   return (
     <>
       <div className="todoTasks">
@@ -108,7 +68,7 @@ const ToDoForm = ({ searchValue }) => {
         </div>
 
         <ToDoList
-          task={searchTask}
+          tasks={searchValue ? filteredTasks : todos}
           onDeleteClick={handleDeleteClick}
           onComletedClick={handleCompleted}
           onHandleEditClick={handleEditClick}

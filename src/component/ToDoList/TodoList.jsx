@@ -1,16 +1,15 @@
 import ToDoItem from "../ToDoItem/TodoItem";
 import "./TodoList.css";
 const ToDoList = ({
-  task,
+  tasks,
   onDeleteClick,
   onComletedClick,
   onHandleEditClick,
-  onSaveEdit
- 
+  onSaveEdit,
 }) => {
   return (
     <div className="toDoList">
-      {task.map((el, index) => (
+      {tasks.map((el, index) => (
         <ToDoItem
           id={index}
           key={index}
@@ -18,8 +17,7 @@ const ToDoList = ({
           onDeleteClick={onDeleteClick}
           onComletedClick={onComletedClick}
           onHandleEditClick={onHandleEditClick}
-          onSaveEdit = {onSaveEdit}
-         
+          onSaveEdit={onSaveEdit}
         />
       ))}
     </div>
