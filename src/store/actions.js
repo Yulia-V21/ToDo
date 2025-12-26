@@ -6,11 +6,18 @@ import {
   SAVE_EDIT_TASK,
   SEARCH_TASK,
 } from "./actionsTypes";
+import {
+  getTasks,
+  createTask,
+  updateTask,
+  completedTask,
+  // deleteTask,
+} from "../services/tasksService";
 
-export const addTask = (title) => ({
-  type: ADD_TASK,
-  payload: title,
-});
+export const addTask = (title) => async (dispatch, getState) => {
+  const response = await createTask(title, 1);
+  dispatch({ type: ADD_TASK });
+};
 
 export const deleteTask = (id) => ({
   type: DELETE_TASK,

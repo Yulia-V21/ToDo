@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { searchTask } from "../../store/actions";
-import ToDoBtN from "../ToDoBtn/TodoBtn";
+import "./Search.css";
 
 const ToDoSearch = ({ onSearchClick }) => {
   const searchValue = useSelector((state) => state.searchValue);
@@ -11,8 +11,9 @@ const ToDoSearch = ({ onSearchClick }) => {
   };
 
   return (
-    <div>
+    <div className="todo-search">
       <input
+      className="todo_search_form"
         type="text"
         value={searchValue}
         onChange={handleOnChangeSearch}

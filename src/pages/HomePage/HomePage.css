@@ -1,0 +1,9 @@
+.home_page {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+.home_page h3 {
+  font-size: 50px;
+}
