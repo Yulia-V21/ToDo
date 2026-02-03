@@ -1,0 +1,31 @@
+.person_acc {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 30px 10px;
+  margin: 15px;
+  box-shadow: 0 0 3px 2px #565555;
+}
+.person_acc h3,
+.person_acc h2 {
+  margin: 0;
+}
+
+.person_acc_btn {
+  padding: 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+}
+.person_acc_info,
+.person_acc_tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 10px 20px;
+  flex: 1 1;
+}
+.person_acc_img img {
+  width: 30%;
+}

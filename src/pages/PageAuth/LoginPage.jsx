@@ -1,13 +1,24 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 import ToDoBtN from "../../component/ToDoBtn/TodoBtn";
 import "./LoginPage.css";
 import { useDispatch } from "react-redux";
-import { loginUserAction, loginThunk } from "../../store/usersTasks/actions";
+import { createNewUser, loginThunk } from "../../store/users/actions";
 
 const LoginPage = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const userStore = useSelector((state) => state.users);
+
+  useEffect(() => {
+    if (userStore.currentUser) {
+      localStorage.setItem(
+        "currentUser",
+        JSON.stringify(userStore.currentUser),
+      );
+    }
+  }, [userStore.currentUser]);
 
   const dispatch = useDispatch();
 
@@ -22,9 +33,26 @@ const LoginPage = () => {
   };
 
   const navigate = useNavigate();
-  const handleLogin = (url) => {
-    dispatch(loginThunk(userName, password));
-    // navigate(url);
+
+  const handleLogin = () => {
+    dispatch(loginThunk({ userName, password })).then((result) => {
+      if (result.meta.requestStatus === "fulfilled") {
+        navigate("/todo");
+      } else {
+        alert("Неверный логин или пароль");
+      }
+    });
+  };
+  const handleCreateNewUser = () => {
+    dispatch(createNewUser({ name: userName, userName, password })).then(
+      (result) => {
+        if (result.meta.requestStatus === "fulfilled") {
+          navigate("/todo");
+        } else {
+          alert("Неверный логин или пароль");
+        }
+      },
+    );
   };
 
   return (
@@ -36,14 +64,14 @@ const LoginPage = () => {
           type="text"
           placeholder="User Name"
         />
-        {/* <input type="text" placeholder="User Name" /> */}
         <input
           value={password}
           onChange={handleOnChangePassword}
           type="password"
           placeholder="Password"
         />
-        <ToDoBtN text="Войти" onClick={() => handleLogin("/todo")} />
+        <ToDoBtN text="Войти" onClick={handleLogin} />
+        <ToDoBtN text="Зарегистрироваться" onClick={handleCreateNewUser} />
       </div>
     </div>
   );

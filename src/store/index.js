@@ -1,7 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import todosReducer from "./reducers";
-import usersReducer from "./usersTasks/reducers";
+import todosReducer from "./tasks/reducers";
+import usersReducer from "./users/reducers";
 
-const store = configureStore({ reducer: {users: usersReducer, tasks: todosReducer} });
+const store = configureStore({
+  reducer: { users: usersReducer, tasks: todosReducer },
+});
 
 export default store;

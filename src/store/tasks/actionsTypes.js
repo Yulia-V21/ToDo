@@ -4,3 +4,4 @@ export const EDIT_TASK = "EDIT_TASK";
 export const SAVE_EDIT_TASK = 'SAVE_EDIT_TASK'
 export const STATUS_TASK = "STATUS_TASK";
 export const SEARCH_TASK = "SEARCH_TASK";
+export const FETCH_TASKS = "FETCH_TASKS";

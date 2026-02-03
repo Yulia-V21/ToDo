@@ -7,9 +7,10 @@ const ToDoList = ({
   onHandleEditClick,
   onSaveEdit,
 }) => {
+  
   return (
     <div className="toDoList">
-      {tasks.map((el, index) => (
+      {Array.isArray(tasks) && tasks.map((el, index) => (
         <ToDoItem
           id={index}
           key={index}

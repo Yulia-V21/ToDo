@@ -9,7 +9,7 @@ const ToDoItem = ({
   onHandleEditClick,
   onSaveEdit, 
 }) => {
-  const [inputValue, setInputValue] = useState(taskItem.title);
+  const [inputValue, setInputValue] = useState(taskItem?.title || '');
 
   const handleOnChange = (event) => {
     setInputValue(event.target.value);
@@ -18,19 +18,25 @@ const ToDoItem = ({
   const handleSaveClick = () => {
     onSaveEdit(taskItem.id, inputValue);
   };
-
+  
+if (!taskItem) {
+  return null;
+}
   return (
     <div className="toDoItem">
       <div className="toDoItemText">
-        {taskItem.isEdit ? (
+        
+        {
+        taskItem.isEdit ? (
           <input type="text" value={inputValue} onChange={handleOnChange} />
         ) : (
+      
           <p
-            className={`todoItemTask ${taskItem.isCompleted ? "comleted" : ""}`}
+            className={`todoItemTask ${taskItem?.isCompleted ? "comleted" : ""}`}
           >
             {taskItem.title}
           </p>
-        )}
+         )} 
       </div>
       <div className="toDoItemBtn">
         <ToDoBtN
