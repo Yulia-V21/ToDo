@@ -4,6 +4,22 @@
   gap: 10px;
   align-items: center;
 }
-.home_page h3 {
-  font-size: 50px;
+.home_page_btn button {
+    width: 250px;
+    padding: 22px;
+    font-size: 30px;
+    background-color: #04042ead;
+    text-shadow: 2px 2px 4px rgb(0 0 0 / 79%);
+    
+}
+.home_page_btn button:hover {
+  transform: scale(1.1);
+  background-color: rgba(24, 60, 158, 0.7);
+}
+.home_bg {
+  height: 150vh;
+  background-image: url("./1.png");
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
 }

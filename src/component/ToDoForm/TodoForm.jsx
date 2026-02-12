@@ -24,8 +24,12 @@ const ToDoForm = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("USERiD:", jwtDecode(currentUser).id);
-    dispatch(fetchTasks({token: currentUser, id: jwtDecode(currentUser).id}));
+    // console.log("USERiD:", jwtDecode(currentUser).id);
+    if (currentUser) {
+      dispatch(
+        fetchTasks({ token: currentUser, id: jwtDecode(currentUser).id }),
+      );
+    }
   }, [dispatch, currentUser]);
 
   const handleOnChange = (event) => {

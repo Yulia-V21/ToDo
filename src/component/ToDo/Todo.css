@@ -1,3 +1,7 @@
+.todo{
+  background-color: #bb8cd861;
+  height: 100vh;
+}
 .toDoBg {
   display: flex;
   align-items: center;

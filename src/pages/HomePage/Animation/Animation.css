@@ -1,0 +1,17 @@
+.animation_title,
+.animation_subtitle,
+.animation_slogan {
+  text-align: center;
+  font-family: "Playwrite NZ Basic", cursive;
+  font-size: 40px;
+  margin: 10px;
+  color: #ffff;
+   text-shadow: 2px 2px 4px rgb(0 0 0 / 79%);
+}
+.animation_title {
+margin-top: 20px;
+ font-size: 50px;
+}
+.animation_slogan  {
+font-size: 50px;
+}

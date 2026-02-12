@@ -7,10 +7,12 @@ export const createUser = ({name, username, password}) =>
 export const getUserById = (id) => server.get(`/users/:${id}`);
 export const deleteUser = (id) => server.delete(`/users/:${id}`);
 export const loginUser = (username, password) => {
-  console.log(password);
   return server.post("/users/login", { username, password });
 };
-export const editPassword = (password, id) =>
-  server.patch(`/users/:${id}`, { password });
+export const editPassword = ({password, id, username, authToken}) =>
+  server.patch(`/users/${id}`, { password, username }, { headers: { Authorization: authToken } });
+
+
+
 export const editPasswordByName = (name, password, username) =>
   server.patch("/users/", { name, password, username });

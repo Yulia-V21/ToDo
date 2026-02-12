@@ -1,6 +1,6 @@
 import { createReducer, createSlice } from "@reduxjs/toolkit";
 import { CREATE_USER, LOGIN_USER } from "./actionsTypes";
-import { loginThunk, createNewUser } from "./actions";
+import { loginThunk, createNewUser, getOutUser, editPasswordAction} from "./actions";
 
 const initialState = {
   users: [],
@@ -22,7 +22,15 @@ const usersReducer = createSlice({
           userName: action.payload.userName,
           password: action.payload.password,
         });
-      });
+      })
+      .addCase(getOutUser.fulfilled, (state, action) => {
+        state.currentUser = action.payload;
+      })
+      .addCase(editPasswordAction.fulfilled, (state, action) => {
+        console.log(action.payload);
+        state.currentUser = action.payload.token;
+
+      })
   },
 });
 

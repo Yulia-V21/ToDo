@@ -2,23 +2,27 @@ import ToDoBtN from "../../component/ToDoBtn/TodoBtn";
 import person_ico from "./person_ico.png";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchTasks } from "../../store/tasks/actions";
 import "./PersonAcc.css";
 import { useEffect, useState } from "react";
+import ModalEditPassword from "./ModalEditPassword/ModalEditPassword";
 
 const PersonAcc = () => {
   const [totalTask, setTotalTask] = useState(0);
   const [totalCompleted, setTotalCompleted] = useState(0);
   const todos = useSelector((state) => state.tasks.todos || []);
-  console.log(todos);
   const currentUser = useSelector((state) => state.users.currentUser);
+  const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(fetchTasks({ token: currentUser, id: jwtDecode(currentUser).id }));
     setTotalTask(todos?.length || 0);
     setTotalCompleted(
       Array.isArray(todos) ? todos.filter((t) => t && t.isCompleted).length : 0,
     );
-  }, [todos]);
+  }, []); //Здесь точно так должно быть? todos
+
   const userName = jwtDecode(currentUser).username;
   const navigate = useNavigate();
   const handleNavigate = (url) => {
@@ -43,6 +47,8 @@ const PersonAcc = () => {
           <h3> Количество задач: {totalTask}</h3>
           <h3> Количество выполненныx задач: {totalCompleted}</h3>
         </div>
+
+        <ModalEditPassword />
       </div>
     </div>
   );

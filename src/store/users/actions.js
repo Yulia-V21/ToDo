@@ -1,6 +1,15 @@
-import { CREATE_USER, LOGIN_USER } from "./actionsTypes";
+import {
+  CREATE_USER,
+  LOGIN_USER,
+  GET_OUT_USER,
+  EDIT_PASSWORD_USER,
+} from "./actionsTypes";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { loginUser, createUser } from "../../services/userService";
+import {
+  loginUser,
+  createUser,
+  editPassword,
+} from "../../services/userService";
 
 export const loginThunk = createAsyncThunk(
   LOGIN_USER,
@@ -18,15 +27,22 @@ export const createNewUser = createAsyncThunk(
   },
 );
 
-// export const createUser = (id, _name, username, password) => ({
-//   type: CREATE_USER,
-//   payload: {
-//     id: id,
-//     _name: _name,
-//     username: username,
-//     password: password,
-//   },
-// });
+export const getOutUser = createAsyncThunk(GET_OUT_USER, async () => {
+  localStorage.removeItem("currentUser");
+  return null;
+});
+
+export const editPasswordAction = createAsyncThunk(
+  EDIT_PASSWORD_USER,
+  async ({ password, id, username, token }) => {
+    console.log("ACTIONS", token);
+    const authToken = "Bearer " + token;
+    console.log(id, password);
+    const response = await editPassword({ password, id, username, authToken });
+    return response.data;
+  },
+);
+
 export const loginUserAction =
   (username, password) => async (dispatch, getState) => {
     const response = await loginUser(username, password);
